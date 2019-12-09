@@ -27,10 +27,8 @@ public class Main {
 			}
 		} catch (IOException e) {
 			System.err.println("Hiba a beolvasásnál" + e);
-		}
-		
-		return telefonok;
-	
+		}		
+		return telefonok;	
 	}
 	
 	
