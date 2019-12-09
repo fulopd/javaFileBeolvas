@@ -9,24 +9,28 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		List<Telefon> telefonok = new ArrayList();		
+		for (Telefon telefon : fileBeolva()) {
+			System.out.println(telefon.getMarka() +" " + telefon.getTipus() + " "  + telefon.getKiadasEve());
+		}
+		
+	}
+	
+	
+	public static List<Telefon> fileBeolva(){
+		List<Telefon> telefonok = new ArrayList<>();		
 		try {
-			List<String> sorok = Files.readAllLines(Paths.get("src/adatok.csv"));
-			sorok.remove(0);
-			for (String sor : sorok) {
+			List<String> sorok = Files.readAllLines(Paths.get("src/adatok.csv"));			
+			for (String sor : sorok.subList(1, sorok.size())) {
 				String[] adat = sor.split(";");
 				Telefon o = new Telefon(adat[0], adat[1], Integer.parseInt(adat[2]));
 				telefonok.add(o);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Hiba a beolvasásnál" + e);
 		}
 		
-		for (Telefon telefon : telefonok) {
-			System.out.println(telefon.getMarka() +" " + telefon.getTipus() + " "  + telefon.getKiadasEve());
-		}
-		
+		return telefonok;
+	
 	}
 	
 	
